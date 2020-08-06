@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="cancel-button" (click)="deleteCard.emit(card)"></div>
+    <div class="card-body">
+        <p>{{card.task}}</p>
+    </div>
+    <div class="status-container">
+        <p>Status:</p>
+        <div class="status-code" [ngClass]="{'complete':card.status==='complete','incomplete':card.status==='incomplete','issue':card.status==='issue','in-progress':card.status==='in-progress'}">{{card.status}}</div>
+        <button class="update" (click)="togglehide()">Update</button>
+    </div>
+    <br>
+    <div class="update-section" [ngClass]="{'hide':display}">
+        <form class="new-card-form">
+            <div class="form-group">
+                <label>Task</label><br>
+                <input type="text" name="task" class="modal-input" #task>
+            </div>
+            <div class="form-group">
+                <label>Column Name</label><br>
+                <select class="select" name="selectColumn" #selectColumn>
+              <option class="option" *ngFor="let column of Columns" value={{column.columnName}}>{{column.columnName}}</option>
+            </select>
+            </div>
+            <br>
+            <div class="submit-card" (click)="updateCard(task.value,selectColumn.value)">Done</div>
+            <br>
+        </form>
+    </div>
+    <br>
+</div>

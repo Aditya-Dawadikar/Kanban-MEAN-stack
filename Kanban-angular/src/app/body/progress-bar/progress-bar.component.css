@@ -1,0 +1,38 @@
+.progress-bar-container {
+    position: absolute;
+    left: 34%;
+    top: 20%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    margin-top: 2%;
+}
+
+.progress-bar {
+    display: flex;
+    width: 500px;
+    height: 30px;
+    background-color: #e4eaf0;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.complete {
+    width: 10%;
+    height: 30px;
+    background-color: #a2fca8;
+    border-radius: 20px;
+    z-index: 2;
+    position: absolute;
+}
+
+.in-progress {
+    width: 20%;
+    height: 30px;
+    background-color: #65c9f7;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.hide {
+    display: none;
+}

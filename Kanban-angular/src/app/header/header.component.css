@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+    height: 125px;
+    /*background-color: #2b6fa6;*/
+    /*background-color: #03fc8c;*/
+    background: linear-gradient(to bottom right, #91fad7, #31f77d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px #888888;
+    overflow: hidden;
+    position: relative;
+}
+
+.center-header {
+    font-size: 40px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

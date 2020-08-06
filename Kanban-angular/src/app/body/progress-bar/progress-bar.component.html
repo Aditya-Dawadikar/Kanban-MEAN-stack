@@ -1,0 +1,8 @@
+<div class="progress-bar-container ">
+    <p>Progress</p>
+    <br>
+    <div class="progress-bar">
+        <div class="complete" [ngStyle]="{'width.%': completePercentage}"></div>
+        <div class="in-progress" [ngStyle]="{'width': progressPercentage+'%'}"></div>
+    </div>
+</div>

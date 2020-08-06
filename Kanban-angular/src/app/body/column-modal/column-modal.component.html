@@ -1,0 +1,28 @@
+<div class="card-modal" [class.hide]="tohide">
+    <a routerLink="/kanban" routerLinkActive="active">
+        <div class="cancel-button"></div>
+    </a>
+
+    <form class="new-card-form">
+        <div class="form-group">
+            <label>Column Name</label><br>
+            <input type="text" name="column" class="modal-input" #columnName>
+        </div>
+        <div class="form-group">
+            <label>Column Type</label><br>
+            <select class="select" name="columnType" #columnType>
+              <option class="option" value="incomplete">Todo</option>
+              <option class="option" value="complete">Completed</option>
+              <option class="option" value="in-progress">In Progress</option>
+              <option class="option" value="issue">Issues</option>
+            </select>
+        </div>
+        <br>
+        <a routerLink="/kanban" routerLinkActive="active">
+            <button class="submit-card" (click)="createColumn(columnName.value,columnType.value)">
+            Add Column
+          </button>
+        </a>
+        <br>
+    </form>
+</div>

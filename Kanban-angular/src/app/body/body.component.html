@@ -1,0 +1,11 @@
+<div class="container">
+    <!--<app-progress-bar></app-progress-bar>-->
+    <ul class="column-container">
+        <li *ngFor="let column of Columns">
+            <app-column (deleteColumn)="deleteColumnFromArray(column)" [column]="column"></app-column>
+        </li>
+    </ul>
+
+    <app-add-column></app-add-column>
+    <app-add-card-float></app-add-card-float>
+</div>

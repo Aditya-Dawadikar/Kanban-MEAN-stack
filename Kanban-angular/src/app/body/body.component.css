@@ -1,0 +1,15 @@
+.container {
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.column-container {
+    display: flex;
+    list-style: none;
+    margin-top: 5%;
+    padding: 0;
+    top: 30%;
+}

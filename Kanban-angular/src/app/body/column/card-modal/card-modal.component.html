@@ -1,0 +1,21 @@
+<div class="card-modal">
+    <a routerLink="/kanban" routerLinkActive="active">
+        <div class="cancel-button"></div>
+    </a>
+
+    <form class="new-card-form">
+        <div class="form-group">
+            <label>Task</label><br>
+            <input type="text" name="task" class="modal-input" #task>
+        </div>
+        <div class="form-group">
+            <label>Column Name</label><br>
+            <select class="select" name="selectColumn" #selectColumn>
+              <option class="option" *ngFor="let column of COLUMNS" value={{column.columnName}}>{{column.columnName}}</option>
+            </select>
+        </div>
+        <br>
+        <a routerLink="/kanban" routerLinkActive="active"><button class="submit-card" (click)="createCard(selectColumn.value,task.value)">Add Card</button></a>
+        <br>
+    </form>
+</div>
