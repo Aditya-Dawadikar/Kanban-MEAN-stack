@@ -16,7 +16,7 @@ export class ColumnComponent implements OnInit {
   @Input() column:Column;
 
   //interpolation variables
-  cards=CARDS;
+  cards:any;
 
   constructor(private cardService:CardApiService) { }
 
@@ -31,7 +31,9 @@ export class ColumnComponent implements OnInit {
 
   deleteCardFromArray(card){
     let index=this.cards.indexOf(card);
-    //console.log("index:"+index);
+    this.cardService.deleteCard(this.cards[index]._id).subscribe((response)=>{
+      console.log(response);
+    });
     this.cards.splice(index,1);
     //console.log(this.cards);
   }

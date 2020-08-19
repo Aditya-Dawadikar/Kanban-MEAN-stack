@@ -11,6 +11,7 @@ export class ColumnApiService {
   private allColumnsUrl="http://localhost:3000/column/all";
   private newColumnUrl="http://localhost:3000/column/new";
   private columnNamesUrl="http://localhost:3000/column/all/names";
+  private deleteColumnUrl = "http://localhost:3000/column/delete/";
 
   getAllColumns(){
     return this.http.get(this.allColumnsUrl);
@@ -27,4 +28,14 @@ export class ColumnApiService {
     }
     return this.http.post(this.newColumnUrl,reqBody);
   }
+
+  updateColumn(){
+
+  }
+
+  deleteColumn(id:string){
+    let deleteUrl = this.deleteColumnUrl + id;
+    return this.http.delete(deleteUrl)
+  }
+
 }

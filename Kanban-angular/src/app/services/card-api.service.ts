@@ -11,10 +11,8 @@ export class CardApiService {
 
   private newCardUrl = "http://localhost:3000/card/new";
   private getAllCardsUrl = "http://localhost:3000/card/all";
-  /*
-  private updateCardUrl = "http://localhost:3000/card/update/:id";
-  private deleteCardUrl = "http://localhost:3000/card/delete/:id";
-  */
+  private updateCardUrl = "http://localhost:3000/card/update/";
+  private deleteCardUrl = "http://localhost:3000/card/delete/";
 
   getAllCards(){
     return this.http.get(this.getAllCardsUrl);
@@ -27,6 +25,11 @@ export class CardApiService {
         status: card.status
     }
     return this.http.post(this.newCardUrl,reqBody);
+  }
+
+  deleteCard(id:string){
+    let deleteUrl = this.deleteCardUrl + id;
+    return this.http.delete(deleteUrl);
   }
 
 }
