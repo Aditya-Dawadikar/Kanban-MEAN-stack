@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {Card} from '../../shared/card';
-import {ColumnComponent} from '../column/column.component';
-import {CARDS} from '../../shared/mock-card';
+import {ColumnApiService} from '../../services/column-api.service';
+
 import {COLUMNS} from '../../shared/mock-column';
-import { Column } from '../../shared/column';
 
 @Component({
   selector: 'app-column-modal',
   templateUrl: './column-modal.component.html',
   styleUrls: ['./column-modal.component.css']
 })
+
 export class ColumnModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private columnService:ColumnApiService) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +32,9 @@ export class ColumnModalComponent implements OnInit {
       this.newColumn.columnName=columnName;
       this.newColumn.columnType=columnType;
       COLUMNS.push(this.newColumn);
+      this.columnService.createNewColumn(this.newColumn).subscribe((response:any)=>{
+        console.log(response);
+      })
     }else{
       alert("Column must be named");
     }

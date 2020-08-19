@@ -16,7 +16,7 @@ export class ColumnComponent implements OnInit {
   @Input() column:Column;
 
   //interpolation variables
-  private cards=CARDS;
+  cards=CARDS;
 
   constructor(private cardService:CardApiService) { }
 

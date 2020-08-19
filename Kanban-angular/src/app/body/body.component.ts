@@ -17,8 +17,8 @@ export class BodyComponent implements OnInit {
   }
 
   //interpolation variables
-  private Columns:any;
-  private Cards= CARDS;
+  Columns:any;
+  Cards= CARDS;
 
   ngOnInit(): void {
     //trying to fetch data from server

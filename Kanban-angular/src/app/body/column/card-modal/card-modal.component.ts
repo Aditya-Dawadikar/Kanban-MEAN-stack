@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import {ProgressStatusService} from '../../../services/progress-status.service';
+import {CardApiService} from '../../../services/card-api.service';
+import {ColumnApiService} from '../../../services/column-api.service';
 
 import {CARDS} from '../../../shared/mock-card';
 import { COLUMNS } from '../../../shared/mock-column';
@@ -10,9 +11,10 @@ import { Card } from 'src/app/shared/card';
   templateUrl: './card-modal.component.html',
   styleUrls: ['./card-modal.component.css']
 })
+
 export class CardModalComponent implements OnInit {
 
-  COLUMNS=COLUMNS;
+  COLUMNS:any=[];
   newCard:Card={
     columnName:"Todo",
     task:"",
@@ -20,9 +22,15 @@ export class CardModalComponent implements OnInit {
   };
   public tohide=false;
 
-  constructor(private progressStatus:ProgressStatusService) { }
+  constructor(private cardService:CardApiService,private columnService:ColumnApiService) { }
 
   ngOnInit(): void {
+    this.columnService.getAllColumns().subscribe((response:any)=>{
+      for(let i=0;i<response.docs.length;i++){
+        this.COLUMNS.push(response.docs[i]);
+      }
+      console.log(this.COLUMNS);
+    })
   }
 
   createCard(columnName,task){
@@ -32,12 +40,14 @@ export class CardModalComponent implements OnInit {
     if(columnName!=""){
       this.newCard.task=task;
       this.newCard.columnName=columnName;
-      let index = COLUMNS.findIndex(column => column.columnName ===columnName);
-      this.newCard.status=COLUMNS[index].columnType;
+      let index = this.COLUMNS.findIndex(column => column.columnName ===columnName);
+      this.newCard.status=this.COLUMNS[index].columnType;
       CARDS.push(this.newCard);
 
-      //call the update method to update the progessbar
-      this.progressStatus.updateProgress(this.newCard);
+      this.cardService.createNewCard(this.newCard).subscribe((response:any) => {
+        console.log(response);
+      });
+
     }else{
       alert("Card must belong to a column");
     }

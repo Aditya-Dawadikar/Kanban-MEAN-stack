@@ -9,7 +9,22 @@ export class ColumnApiService {
   constructor(private http: HttpClient) { }
 
   private allColumnsUrl="http://localhost:3000/column/all";
+  private newColumnUrl="http://localhost:3000/column/new";
+  private columnNamesUrl="http://localhost:3000/column/all/names";
+
   getAllColumns(){
     return this.http.get(this.allColumnsUrl);
+  }
+
+  getAllColumnNames(){
+    return this.http.get(this.columnNamesUrl);
+  }
+
+  createNewColumn(column:any){
+    let reqBody = {
+      columnName: column.columnName,
+      columnType: column.columnType
+    }
+    return this.http.post(this.newColumnUrl,reqBody);
   }
 }

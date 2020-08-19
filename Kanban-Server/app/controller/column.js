@@ -48,6 +48,35 @@ exports.getAllColumns = (req, res) => {
         })
 }
 
+//get all column names
+exports.getAllColumnNames = (req, res) => {
+    Column.find()
+        .select('-__v')
+        .then(docs => {
+            if (docs.length === 0) {
+                res.status(200).json({
+                    message: "success",
+                    docs: "no columns available"
+                })
+            } else {
+                let columnNames = [];
+                for (let i = 0; i < docs.length; i++) {
+                    columnNames.push(docs[i].columnName);
+                }
+                res.status(200).json({
+                    message: "success",
+                    columnNames: columnNames
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "some error occured while fetching data from database",
+                error: err
+            });
+        })
+}
+
 //update column by id
 exports.updateById = (req, res) => {
     const updateOps = req.body;
