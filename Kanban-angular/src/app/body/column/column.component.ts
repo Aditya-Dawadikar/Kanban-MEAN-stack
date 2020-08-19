@@ -1,4 +1,6 @@
 import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
+import {CardApiService} from '../../services/card-api.service';
+
 import {CARDS} from '../../shared/mock-card';
 import {Column} from '../../shared/column';
 
@@ -13,11 +15,18 @@ export class ColumnComponent implements OnInit {
   @Output() addCardEmitter = new EventEmitter();
   @Input() column:Column;
 
-  cards=CARDS;
+  //interpolation variables
+  private cards=CARDS;
 
-  constructor() { }
+  constructor(private cardService:CardApiService) { }
 
   ngOnInit(): void {
+    //trying to fetch data from server
+    this.cardService.getAllCards().subscribe((cards:any)=>{
+      this.cards=cards.docs;
+    },(err)=>{
+      console.log(err);
+    })
   }
 
   deleteCardFromArray(card){

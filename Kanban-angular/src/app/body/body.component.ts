@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {COLUMNS} from '../shared/mock-column';
 import {CARDS} from '../shared/mock-card';
+import {ColumnApiService} from '../services/column-api.service';
 
 @Component({
   selector: 'app-body',
@@ -12,13 +13,20 @@ export class BodyComponent implements OnInit {
 
   @Output() columnEmitter= new EventEmitter();
 
-  Columns=COLUMNS;
-  Cards=CARDS;
-
-  constructor() {
+  constructor(private columnService:ColumnApiService) {
   }
 
+  //interpolation variables
+  private Columns:any;
+  private Cards= CARDS;
+
   ngOnInit(): void {
+    //trying to fetch data from server
+    this.columnService.getAllColumns().subscribe((columns:any)=>{
+      this.Columns = columns.docs;
+    },(err)=>{
+      console.log(err);
+    })
   }
 
   deleteColumnFromArray(column){
