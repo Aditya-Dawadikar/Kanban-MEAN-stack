@@ -32,4 +32,14 @@ export class CardApiService {
     return this.http.delete(deleteUrl);
   }
 
+  updateCard(id:string,card){
+    let updateUrl = this.updateCardUrl + id;
+    let reqBody={
+      columnName: card.columnName,
+      task: card.task,
+      status: card.status
+    }
+    return this.http.patch(updateUrl,reqBody);
+  }
+
 }

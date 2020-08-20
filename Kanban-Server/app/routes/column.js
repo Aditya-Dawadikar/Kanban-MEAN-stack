@@ -9,7 +9,7 @@ router.post('/new', columnController.addNewColumn);
 //get all columns
 router.get('/all', columnController.getAllColumns);
 
-//get all columns names
+//get all column names and status
 router.get('/all/names', columnController.getAllColumnNames);
 
 //update a column by id

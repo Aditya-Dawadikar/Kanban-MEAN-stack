@@ -59,13 +59,17 @@ exports.getAllColumnNames = (req, res) => {
                     docs: "no columns available"
                 })
             } else {
-                let columnNames = [];
+                let columnInfo = [];
                 for (let i = 0; i < docs.length; i++) {
-                    columnNames.push(docs[i].columnName);
+                    let column = {
+                        columnName: docs[i].columnName,
+                        status: docs[i].columnType
+                    }
+                    columnInfo.push(column);
                 }
                 res.status(200).json({
                     message: "success",
-                    columnNames: columnNames
+                    columns: columnInfo
                 })
             }
         })
