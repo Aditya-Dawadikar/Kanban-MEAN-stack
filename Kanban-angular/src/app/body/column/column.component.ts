@@ -16,27 +16,35 @@ export class ColumnComponent implements OnInit {
   @Input() column:Column;
 
   //interpolation variables
-  cards:any;
+  childCards:any=[];
 
   constructor(private cardService:CardApiService) { }
 
   ngOnInit(): void {
-    //trying to fetch data from server
     this.cardService.getAllCards().subscribe((cards:any)=>{
-      this.cards=cards.docs;
+      this.getChildCards(cards.docs);
     },(err)=>{
       console.log(err);
     })
   }
 
-  deleteCardFromArray(card){
-    let index=this.cards.indexOf(card);
-    this.cardService.deleteCard(this.cards[index]._id).subscribe((response)=>{
-      console.log(response);
-    });
-    this.cards.splice(index,1);
-    //console.log(this.cards);
+  getChildCards(cards){
+    for(let i=0;i<cards.length;i++){
+      if(this.column.columnName === cards[i].columnName){
+        this.childCards.push(cards[i]);
+        this.column.cards.push(cards[i]);
+      }
+    }
   }
 
-  updateColumn(columnName,columnType){}
+  deleteCardFromArray(card){
+    alert('this card will be permanently deleted');
+    let index=this.childCards.indexOf(card);
+    this.cardService.deleteCard(this.childCards[index]._id).subscribe((response)=>{
+      console.log(response);
+    });
+    this.childCards.splice(index,1);
+  }
+
+  //updateColumn(columnName,columnType){}
 }

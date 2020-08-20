@@ -1,6 +1,7 @@
 <div class="column">
     <div class="column-header">{{column.columnName}}
         <div class="cancel-button" (click)="deleteColumn.emit()"></div>
+        <!--
         <div class="update-section hide">
             <form class="new-card-form">
                 <div class="form-group">
@@ -24,11 +25,11 @@
                 </a>
                 <br>
             </form>
-        </div>
+        </div>-->
     </div>
     <div class="column-body ">
         <ul class="card-container ">
-            <li *ngFor="let card of cards ">
+            <li *ngFor="let card of childCards ">
                 <app-card *ngIf="card.columnName===column.columnName " [card]=card (deleteCard)="deleteCardFromArray(card) "></app-card>
             </li>
         </ul>

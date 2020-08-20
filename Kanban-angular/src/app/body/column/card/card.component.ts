@@ -42,7 +42,7 @@ export class CardComponent implements OnInit{
 
   updateCard(task,columnName){
     let id=this.card._id;
-    let status;//must be taken from the columns list
+    let status;
     let columns=[]
     this.columnService.getAllColumnNames().subscribe((response:any)=>{
       for(let i=0;i<response.columns.length;i++){
@@ -63,10 +63,9 @@ export class CardComponent implements OnInit{
       })
 
     })
-
-
     this.createCard(columnName,task);
     this.deleteCardFromArray(this.card);
+    this.togglehide();
   }
 
   createCard(columnName,task){
@@ -97,5 +96,12 @@ export class CardComponent implements OnInit{
   togglehide(){
     this.display=!this.display;
   }
+
+  /*
+  updateMechanism(task,columnName){
+    this.updateCard(task,columnName);
+    this.togglehide();
+    window.location.reload();
+  }*/
 }
 

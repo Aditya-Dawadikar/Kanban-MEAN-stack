@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {ColumnApiService} from '../services/column-api.service';
+import {CardApiService} from '../services/card-api.service';
 
 import {COLUMNS} from '../shared/mock-column';
 import {CARDS} from '../shared/mock-card';
+import { fromEventPattern } from 'rxjs';
 
 @Component({
   selector: 'app-body',
@@ -14,7 +16,7 @@ export class BodyComponent implements OnInit {
 
   @Output() columnEmitter= new EventEmitter();
 
-  constructor(private columnService:ColumnApiService) {
+  constructor(private columnService:ColumnApiService,private cardService:CardApiService) {
   }
 
   //interpolation variables
@@ -31,17 +33,16 @@ export class BodyComponent implements OnInit {
   }
 
   deleteColumnFromArray(column){
+    alert("all the cards under this column will be deleted");
     let index=this.Columns.indexOf(column);
-    console.log(this.Columns[index]);
+    for(let i=0;i<column.cards.length;i++){
+      this.cardService.deleteCard(column.cards[i]._id).subscribe((response)=>{
+        console.log(response);
+      });
+    }
     this.columnService.deleteColumn(this.Columns[index]._id).subscribe((response)=>{
       console.log(response);
     });
     this.Columns.splice(index,1);
-    /*
-    let newArray=this.Cards.filter(function(card){
-      return card.status!==column.columnType;
-    });
-    this.Cards=newArray;
-    */
   }
 }
